@@ -21,14 +21,14 @@ $(document).ready(function(){
 
     //Create a function that will populate images from the giphy app API 
     $(document).on("click", ".food-button", function(){
-        $("#images").empty();
+        //$("#images").empty();
 
-        $(".food-button").removeClass("active");
-        $(this).addClass("active");
+       // $(".food-button").removeClass("active");
+        //$(this).addClass("active");
 
         let type = $(this).attr("data-type");
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        type + "&api_key=dc6zaTOxFJmzC&limit=10";
+        type + "&api_key=DLaR3fkwkjQGYxvsC8ankszBYkwzeNIU&limit=10";
         //ajax Call
 
         $.ajax({
@@ -39,19 +39,20 @@ $(document).ready(function(){
         .then(function(response){
             let results = response.data;
          
+            console.log(response);
             for (var i = 0; i < results.length; i++){
                  let foodDiv = $("<div class=\"food-item\">");
-                 let rating = resilts[i].rating;
+                 let rating = results[i].rating;
                  let p = $("<p>").text("Rating:" + rating);
-                 let animated = results[i].images.fixed_heigth.url;
-                 let still = results[i].images.fixed_heigth_still.url;
+                 let animated = $("<img>");
+                  animated.attr("src", results[i].images.fixed_height_still.url);
 
-                 let foodImage = $("<img>");
-                 foodImage.attr("src", still);
-                 foodImage.attr("data-still", still);
-                 foodImage.attr("data-animate", animated);
-                 foodImage.attr("data-state", "still");
-                 foodImage.addClass("food-image");
+                //  let foodImage = $("<img>");
+                //  foodImage.attr("src", still);
+                //  foodImage.attr("data-still", still);
+                //  foodImage.attr("data-animate", animated);
+                //  foodImage.attr("data-state", "still");
+                //  foodImage.addClass("food-image");
 
                  foodDiv.append(p);
                  foodDiv.append(foodImage);
