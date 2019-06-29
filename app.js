@@ -39,13 +39,19 @@ $(document).ready(function(){
         .then(function(response){
             let results = response.data;
          
-            console.log(response);
+            // console.log(response);
             for (var i = 0; i < results.length; i++){
-                 let foodDiv = $("<div class=\"food-item\">");
-                 let rating = results[i].rating;
-                 let p = $("<p>").text("Rating:" + rating);
-                 let animated = $("<img>");
-                  animated.attr("src", results[i].images.fixed_height_still.url);
+                // console.log(response[i])
+                let foodDiv = $("<div >");//class=\"food-item\"
+                let rating = results[i].rating;
+                let p = $("<p>").text("Rating:" + rating);
+                let animated = $("<img>");
+                animated.attr("src", results[i].images.fixed_height_still.url);
+                animated.attr('data-isMoving', 'false')
+                animated.attr('data-stillImageSource', results[i].images.fixed_height_still.url);
+                animated.attr('data-movingImageSource', results[i].images.fixed_height.url);
+            
+                animated.addClass('image');
 
                 //  let foodImage = $("<img>");
                 //  foodImage.attr("src", still);
@@ -54,10 +60,10 @@ $(document).ready(function(){
                 //  foodImage.attr("data-state", "still");
                 //  foodImage.addClass("food-image");
 
-                 foodDiv.append(p);
-                 foodDiv.append(foodImage);
+                foodDiv.append(p);
+                foodDiv.append(animated);
 
-                 $("#images").append(foodDiv);
+                $("#images").append(foodDiv);
                   
 
             }
@@ -65,18 +71,21 @@ $(document).ready(function(){
     });
 
     //set images from still to animated when clicking each image
+   
+    $("#images").on("click", ".image", function(){
+        let dataSource
+        let isMoving = $(this).attr("data-isMoving");
 
-    $(document).on("click", ".food-image", function(){
-        let state = $(this).attr("date-state");
-
-        if (state === "still"){
-            $(this).attr("src", $(this).attr("data-animate"));
-            $(this).attr("data-state", "animate");
+        if (isMoving === "false"){
+            dataSource = $(this).attr("data-movingImageSource");
+            $(this).attr("src", dataSource);
+            $(this).attr("data-isMoving", "true");
 
         }
-        else {
-          $(this).attr("src", $(this).attr("data-still"));
-          $(this).attr("data-state", "still");
+        if (isMoving === "true") {
+            dataSource = $(this).attr("data-stillImageSource");
+            $(this).attr("src", dataSource);
+            $(this).attr("data-isMoving", "false");
         }  
 
     });
