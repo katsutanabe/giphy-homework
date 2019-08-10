@@ -20,9 +20,9 @@ $(document).ready(function(){
     }
 
     //Create a function that will populate images from the giphy app API 
-    $(document).on("click", ".food-button", function(){
+    $("#food-buttons").on("click", ".food-button", function(){
         //$("#images").empty();
-
+    event.preventDefault();
        // $(".food-button").removeClass("active");
         //$(this).addClass("active");
 
@@ -60,10 +60,10 @@ $(document).ready(function(){
                 //  foodImage.attr("data-state", "still");
                 //  foodImage.addClass("food-image");
 
-                foodDiv.append(p);
-                foodDiv.append(animated);
+                foodDiv.prepend(p);
+                foodDiv.prepend(animated);
 
-                $("#images").append(foodDiv);
+                $("#images").prepend(foodDiv);
                   
 
             }
@@ -92,13 +92,21 @@ $(document).ready(function(){
 
     $("#add-food").on("click", function(event){
         event.preventDefault();
-        let newFood = $("input").eq(0).val();
+        //let newFood = $("input").eq(0).val();
+          let newFood = $("input").val().trim();
         
-        
-        if(newFood.length > 2){
+        if (newFood === "") {
+            return;
+        }else if (newFood.indexOf(foods) === -1) {
+            console.log(newFood);
             foods.push(newFood);
+            
         }
+        // if(newFood.length > 2){
+        //     foods.push(newFood);
+        $("#food-input").val("");
         populateButtons(foods, "food-button", "#food-buttons");
+        //$("#add-food").val("");
     });
 
     populateButtons(foods, "food-button", "#food-buttons");
