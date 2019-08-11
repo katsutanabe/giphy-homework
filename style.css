@@ -1,7 +1,16 @@
 body {
-    font: 18px arial, sans-serif;
-    background: rgb(68, 81, 85);
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 25px;
+    background: rgb(166, 167, 197);
 }
+
+h1{
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 40px;
+    text-align: center;
+    margin: 10px;
+}
+
 
 #food-form{
     float: left;
@@ -14,6 +23,12 @@ body {
 
 }
 
+#images {
+    float:left;
+    z-index: auto;
+   
+}
+
 .food-item {
     float:left;
     padding: 10px;
@@ -21,7 +36,7 @@ body {
 
 form {
     float: right;
-    width: 30%;
+    width: 20%;
     padding: 20px
 }
 label {
@@ -42,10 +57,11 @@ button,
 input[type="submit"] {
     padding: 5px 20px;
     margin: 0 10px 10px 0;
-    font-size:18px;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 22px;
     color: #fff;
     cursor: pointer;
-    background: #659a98;
+    background: #d6622d;
     border: 0;
     border-radius: 5px;
     box-shadow: 2px 2px 3px #bbb;
